@@ -19,7 +19,7 @@
 
 1. **Clonar el repositorio:**
    ```bash
-   git clone [https://github.com/SAndresLopez/Nexus_Market.git](https://github.com/SAndresLopez/Nexus_Market.git)
+   git clone https://github.com/SAndresLopez/Nexus_Market.git
    cd Nexus_Market
 2. **Crear y activar el entorno virtual:**
    ```bash   
