@@ -27,33 +27,46 @@
             </div>
         </div>
 
+        <form method="GET" action="{% url 'home' %}" class="d-flex mb-4" role="search">
+          <input
+            class="form-control me-2"
+            type="search"
+            name="q"
+            placeholder="Buscar productos..."
+            value="{{ request.GET.q|default:'' }}"
+          >
+          <button class="btn btn-outline-dark" type="submit">Buscar</button>
+        </form>
+
         <div class="row">
             {% for p in productos %}
             <div class="col-md-4 mb-4">
                 <div class="card h-100 border-0 shadow-sm">
+
+                    {% if p.imagen %}
+                        <img src="{{ p.imagen.url }}"
+                         class="card-img-top"
+                         alt="{{ p.nombre }}"
+                         style="height: 250px; object-fit: contain; padding: 20px;">
+                    {% else %}
+                        <img src="https://via.placeholder.com/300x200?text=Sin+Imagen" class="card-img-top" alt="Sin imagen">
+                    {% endif %}
+
                     <div class="card-body">
-                        <div class="card h-100 border-0 shadow-sm">
-                            {% if p.imagen %}
-                                <img src="{{ p.imagen.url }}"
-                                     class="card-img-top"
-                                     alt="{{ p.nombre }}"
-                                     style="height: 250px; object-fit: contain; padding: 20px;">
-                            {% else %}
-                                <img src="https://via.placeholder.com/300x200?text=Sin+Imagen" class="card-img-top" alt="Sin imagen">
-                            {% endif %}
-                            <div class="card-body">
                         <div class="d-flex justify-content-between align-items-start mb-2">
                             <h5 class="card-title mb-0 fw-bold">{{ p.nombre }}</h5>
                             <span class="badge bg-success text-white">${{ p.precio }}</span>
                         </div>
                         <p class="card-text text-secondary">{{ p.descripcion }}</p>
                     </div>
+
                     <div class="card-footer bg-white border-0 pb-3">
                         <div class="d-flex justify-content-between align-items-center">
                             <small class="text-muted">Stock: <strong>{{ p.stock }}</strong></small>
                             <a href="{% url 'detalle' p.pk %}" class="btn btn-dark btn-sm px-4">Comprar</a>
                         </div>
                     </div>
+
                 </div>
             </div>
             {% empty %}

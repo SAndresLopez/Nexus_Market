@@ -2,7 +2,12 @@ from django.shortcuts import render, get_object_or_404
 from .models import Producto
 
 def home(request):
-    productos = Producto.objects.all()
+    query = request.GET.get('q')
+    if query:
+        productos = Producto.objects.filter(nombre__icontains=query)
+    else:
+        productos = Producto.objects.all()
+
     return render(request, 'core/home.html', {'productos': productos})
 
 def detalle_producto(request, pk):
