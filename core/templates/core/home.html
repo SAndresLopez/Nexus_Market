@@ -15,7 +15,17 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="#">🛒 NEXUS MARKET</a>
+            <a class="navbar-brand fw-bold" href="{% url 'home' %}">🛒 NEXUS MARKET</a>
+            <div class="ms-auto">
+                <a href="{% url 'ver_carrito' %}" class="btn btn-outline-light position-relative">
+                    Ver Carrito
+                    {% if request.session.cart %}
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            {{ request.session.cart|length }}
+                        </span>
+                    {% endif %}
+                </a>
+            </div>
         </div>
     </nav>
 
