@@ -22,7 +22,9 @@ def agregar_al_carrito(request, producto_id):
     return redirect('ver_carrito')
 
 def ver_carrito(request):
-    return render(request, 'core/carrito.html')
+    carrito = request.session.get('cart', {})
+    total = sum(float(item['precio']) * item['cantidad'] for item in carrito.values())
+    return render(request, 'core/carrito.html', {'total': total})
 
 def restar_del_carrito(request, producto_id):
     cart = Cart(request)

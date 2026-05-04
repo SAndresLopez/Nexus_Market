@@ -41,3 +41,6 @@ class Cart:
             if self.cart[producto_id]['cantidad'] < 1:
                 self.remove(producto)
             self.save()
+
+    def get_total_price(self):
+        return sum(float(item['precio']) * item['cantidad'] for item in self.cart.values())
